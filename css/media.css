@@ -7,6 +7,11 @@
 
   }
 
+  .hero {
+    padding: 50px 25px;
+    justify-content: flex-start;
+  }
+
   .card {
     width: 100px;
     height: 100px;
