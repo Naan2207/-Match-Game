@@ -1,0 +1,15 @@
+@media(max-width: 600px) {
+
+  .scene {
+    width: 100px;
+    height: 100px;
+    perspective: 100px;
+
+  }
+
+  .card {
+    width: 100px;
+    height: 100px;
+  }
+
+}
