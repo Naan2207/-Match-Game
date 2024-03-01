@@ -7,9 +7,9 @@ let button = document.querySelector('.form__link');
 function checkmyinput() {
 
     var input = document.getElementById("input__count").value;
-    if (input % 2 !== 0) {
-        alert('Введите четное количество Card')
-    } else return input;
+    if (input % 2 == 0 && input<=16) {
+        return input;
+    } else alert('Введите четное количество Card до 16');
 
 }
 
