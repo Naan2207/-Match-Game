@@ -54,13 +54,13 @@ body {
   width: 100%;
   backface-visibility: hidden;
   border-radius: 10px;
-  transition: scale 0.3s linear;
+  transition: scale 0.3s linear display 10s ease-in-out;
   box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px ;
 }
 
-.card__face:hover {
+/* .card__face:hover {
   transform: scale(0.9);
-}
+} */
 
 .card__face--front {
   font-size: 30px;
@@ -82,8 +82,17 @@ body {
 
 .card.flipped {
   transform: rotateY(180deg);
+  
 }
 
 .card.gameend {
   background-color: transparent;
+}
+
+.display__none {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 5s, opacity 3s linear;
+  cursor: initial;
+  /* transition: transform 0.3s ease-in-out; */
 }
