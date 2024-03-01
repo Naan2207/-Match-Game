@@ -1,96 +1,111 @@
 
-let divHero = document.querySelector('.hero')
 
-function massDoubles() {
-    let cardCount = 9;
-    let doubles = [];
+let form = document.querySelector('.login-box');
+let divHero = document.querySelector('.hero');
+let button = document.querySelector('.form__link');
 
-    for (i = 1; i < cardCount; i++) {
-        doubles.push(i, i);
-    } return doubles;
-}
+function checkmyinput() {
 
-function MassMixingDoubles(massDoubl) {
-
-    massDoubl = massDoubles();
-    let temp = 0;
-
-    for (i = 0; i < massDoubl.length; i++) {
-        let j = Math.floor(Math.random() * massDoubl.length)
-        temp = massDoubl[i];
-        massDoubl[i] = massDoubl[j];
-        massDoubl[j] = temp;
-    } return massDoubl;
+    var input = document.getElementById("input__count").value;
+    if (input % 2 !== 0) {
+        alert('Введите четное количество Card')
+    } else return input;
 
 }
 
-function randomCard(mixin) {
+let cardCount = 0;
 
-    mixin = MassMixingDoubles();
+button.addEventListener('click', (e) => {
 
-    let cards = [];
+    cardCount = checkmyinput();
+    console.log(cardCount)
+    if (cardCount % 2 == 0) {
+        form.classList.add('none')
+        divHero.classList.remove('none');
+    }
 
-    for (i = 0; i < mixin.length; i++) {
+    function massDoubles() {
 
-        let sceneCard = document.createElement('div');
-        sceneCard.classList.add('scene');
-        divHero.append(sceneCard);
+        let doubles = [];
+        for (i = 1; i <= cardCount / 2; i++) {
+            doubles.push(i, i);
+        } return doubles;
+    }
 
-        let cardWrap = document.createElement('div');
-        cardWrap.classList.add('card');
-        cards.push(cardWrap)
-        sceneCard.append(cardWrap);
+    function MassMixingDoubles(massDoubl) {
 
-        let cardFront = document.createElement('div')
-        cardFront.classList.add('card__face', 'card__face--front')
-        cardWrap.append(cardFront);
+        massDoubl = massDoubles();
+        let temp = 0;
 
-        let cardBack = document.createElement('div')
-        cardBack.classList.add('card__face', 'card__face--back')
-        cardBack.textContent = mixin[i];
-        cardWrap.append(cardBack);
-    } return cards;
-}
+        for (i = 0; i < massDoubl.length; i++) {
+            let j = Math.floor(Math.random() * massDoubl.length)
+            temp = massDoubl[i];
+            massDoubl[i] = massDoubl[j];
+            massDoubl[j] = temp;
+        } return massDoubl;
 
-let card = randomCard();
+    }
 
-card.forEach((item, i) => {
-  
-    item.addEventListener('click', (e) => {
+    function randomCard(mixin) {
 
-        //  console.log(item.lastChild.textContent)
-        item.classList.add('is-flipped');
-        setTimeout(function () {
-            item.classList.remove("is-flipped");
-        }, 1000);
-    //   if (item.classList.contains('is-flipped')) {
-    //   }
-        item.id = [i+1];
-        rules ()
+        mixin = MassMixingDoubles();
+
+        let cards = [];
+
+        for (i = 0; i < mixin.length; i++) {
+
+            let sceneCard = document.createElement('div');
+            sceneCard.classList.add('scene');
+            divHero.append(sceneCard);
+
+            let cardWrap = document.createElement('div');
+            cardWrap.classList.add('card');
+            cards.push(cardWrap)
+            sceneCard.append(cardWrap);
+
+            let cardFront = document.createElement('div')
+            cardFront.classList.add('card__face', 'card__face--front')
+            cardWrap.append(cardFront);
+
+            let cardBack = document.createElement('div')
+            cardBack.classList.add('card__face', 'card__face--back')
+            cardBack.textContent = mixin[i];
+            cardWrap.append(cardBack);
+        } return cards;
+    }
+
+    let card = randomCard();
+
+    card.forEach((item, i) => {
+
+        item.addEventListener('click', (e) => {
+
+            item.classList.add('is-flipped');
+            setTimeout(function () {
+                item.classList.remove("is-flipped");
+            }, 1000);
+
+            item.id = [i + 1];
+            rules();
+        })
+
     })
 
- })
+    function rules() {
 
-function rules () {
+        let mass = [];
+        for (i = 0; i < card.length; i++) {
+            if (card[i].classList.contains('is-flipped')) {
+                mass.push(card[i])
+            }
+        }
 
-    let mass = [];
-    for (i = 0; i < card.length; i++) {
-       if(card[i].classList.contains('is-flipped'))
-       {
+        if (mass.length > 1) {
+            for (i = 0; i < mass.length; i++) {
 
-        mass.push(card[i])
-       }
-    }
-     if (mass.length > 1) {
-     for ( i = 0; i < mass.length;i++) {
-
-        // if(mass[i].lastChild.textContent == mass[i+1].lastChild.textContent) {
-        //      mass[i].classList.add('display__none')
-        //  mass[i+1].classList.add('display__none')
-        //  }
                 let first = mass[i];
-                let last = mass[i+1];
-                if(first.lastChild.textContent === last.lastChild.textContent) {
+                let last = mass[i + 1];
+                if (first.lastChild.textContent === last.lastChild.textContent) {
                     first.classList.add('is-flipped');
                     setTimeout(function () {
                         first.classList.add('display__none');
@@ -100,12 +115,18 @@ function rules () {
                         last.classList.add('display__none');
                     }, 1000);
                 }
-            console.log('первый текс', first.lastChild.textContent, 'Второй',last.lastChild.textContent)
-     }
+                console.log('первый текс', first.lastChild.textContent, 'Второй', last.lastChild.textContent)
+            }
         }
 
-   
-    // console.log(mass)
-}
+    }
 
-rules ()
+});
+
+
+
+
+
+
+
+
