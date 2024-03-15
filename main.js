@@ -1,13 +1,13 @@
 
 
-let form = document.querySelector('.login-box');
-let divHero = document.querySelector('.hero');
-let button = document.querySelector('.form__link');
+const form = document.querySelector('.login-box');
+const divHero = document.querySelector('.hero');
+const button = document.querySelector('.form__link');
 
 function checkmyinput() {
 
     var input = document.getElementById("input__count").value;
-    if (input % 2 == 0 && input<=16 && input !== '' ) {
+    if (input % 2 == 0 && input <= 16 && input !== '') {
         return input;
     } else alert('Введите четное количество Card до 16');
 
@@ -16,9 +16,8 @@ function checkmyinput() {
 let cardCount = 0;
 
 button.addEventListener('click', (e) => {
-
     cardCount = checkmyinput();
-    console.log(cardCount)
+
     if (cardCount % 2 == 0) {
         form.classList.add('none')
         divHero.classList.remove('none');
@@ -32,9 +31,9 @@ button.addEventListener('click', (e) => {
         } return doubles;
     }
 
-    function MassMixingDoubles(massDoubl) {
+    function MassMixingDoubles() {
 
-        massDoubl = massDoubles();
+        let massDoubl = massDoubles();
         let temp = 0;
 
         for (i = 0; i < massDoubl.length; i++) {
@@ -46,9 +45,9 @@ button.addEventListener('click', (e) => {
 
     }
 
-    function randomCard(mixin) {
+    function randomCard() {
 
-        mixin = MassMixingDoubles();
+        let mixin = MassMixingDoubles();
 
         let cards = [];
 
@@ -71,55 +70,55 @@ button.addEventListener('click', (e) => {
             cardBack.classList.add('card__face', 'card__face--back')
             cardBack.textContent = mixin[i];
             cardWrap.append(cardBack);
+
         } return cards;
     }
 
     let card = randomCard();
 
-    card.forEach((item, i) => {
-
-        item.addEventListener('click', (e) => {
-
-            item.classList.add('is-flipped');
-            setTimeout(function () {
-                item.classList.remove("is-flipped");
-            }, 1000);
-
-            item.id = [i + 1];
-            rules();
-        })
-
-    })
-
     function rules() {
 
         let mass = [];
+
         for (i = 0; i < card.length; i++) {
             if (card[i].classList.contains('is-flipped')) {
                 mass.push(card[i])
             }
         }
 
-        if (mass.length > 1) {
-            for (i = 0; i < mass.length; i++) {
+        if (mass.length == 2) {
+
+            for (i = 0; i < mass.length - 1; i++) {
 
                 let first = mass[i];
                 let last = mass[i + 1];
-                if (first.lastChild.textContent === last.lastChild.textContent) {
-                    first.classList.add('is-flipped');
+
+                if (first.lastChild.textContent == last.lastChild.textContent) {
                     setTimeout(function () {
                         first.classList.add('display__none');
                     }, 1000);
-                    last.classList.add('is-flipped');
                     setTimeout(function () {
                         last.classList.add('display__none');
                     }, 1000);
                 }
-                console.log('первый текс', first.lastChild.textContent, 'Второй', last.lastChild.textContent)
+
             }
         }
 
     }
+
+    card.forEach((item, i) => {
+
+        item.addEventListener('click', (e) => {
+            item.classList.add('is-flipped');
+            setTimeout(function () {
+                item.classList.remove("is-flipped");
+            }, 1000);
+
+            rules();
+        })
+
+    })
 
 });
 
